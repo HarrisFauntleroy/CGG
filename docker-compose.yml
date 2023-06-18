@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  minecraft:
+    image: itzg/minecraft-server
+    environment:
+      TYPE: 'AUTO_CURSEFORGE'
+      CF_API_KEY: '$$2a$$10$$BzWMafJW9.hBdXTbJok8zeLvWsoDMwKjQ.Qhur0CDykwpJFrsEDkW'
+      CF_SLUG: 'casual-gaming-group'
+      MEMORY: '4G'
+      EULA: TRUE
+    volumes:
+      - './data:/data'
+    ports:
+      - '25565:25565'
