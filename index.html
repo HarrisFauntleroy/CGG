@@ -60,7 +60,8 @@
         ];
 
         function fetchServerStatus(game, host, port, id) {
-            const url = `http://localhost:3000/status/${game}/${host}/${port}`;
+            const baseUrl = 'https://cgg.vercel.app/api/health';
+            const url = `${baseUrl}?game=${game}&host=${host}&port=${port}`;
 
             fetch(url)
                 .then(response => response.json())
@@ -83,35 +84,6 @@
                 fetchServerStatus(server.game, server.host, server.port, 'server' + (i + 1));
             });
         };
-    </script>
-    <script>
-        function fetchServerStatus() {
-            const url = 'https://api.mcstatus.io/v2/status/java/202.172.109.118';
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-
-                    const onlineStatus = data.online;
-                    const serverVersion = data.version.name_clean;
-                    const playersOnline = data.players.online;
-                    const playersMax = data.players.max;
-                    const serverMotd = data.motd.clean;
-
-                    document.getElementById('host').textContent = data.host;
-                    document.getElementById('port').textContent = data.port;
-                    document.getElementById('status').textContent = onlineStatus ? 'Online' : 'Offline';
-                    document.getElementById('version').textContent = serverVersion;
-                    document.getElementById('players').textContent = playersOnline + '/' + playersMax;
-                    document.getElementById('motd').textContent = serverMotd;
-
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
-
-        window.onload = fetchServerStatus;
     </script>
 </head>
 
