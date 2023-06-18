@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>My Gaming Community</title>
     <style>
@@ -49,38 +50,110 @@
         .image-container img {
             width: 200px;
         }
-
     </style>
+    <script>
+        const servers = [
+            { game: 'minecraft', host: '202.172.109.118', port: 25565 },
+            { game: 'dayz', host: '202.172.109.118', port: 2302 },
+            { game: '7d2d', host: '202.172.109.118', port: 26900 },
+            { game: 'teamspeak3', host: '202.172.109.118', port: 9987 }
+        ];
+
+        function fetchServerStatus(game, host, port, id) {
+            const url = `http://localhost:3000/status/${game}/${host}/${port}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.getElementById(id).style.display = 'none';
+                    } else {
+                        document.getElementById(id + 'status').textContent = 'Online';
+                        document.getElementById(id + 'players').textContent = data.players.length;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById(id).style.display = 'none';
+                });
+        }
+
+        window.onload = function () {
+            servers.forEach((server, i) => {
+                fetchServerStatus(server.game, server.host, server.port, 'server' + (i + 1));
+            });
+        };
+    </script>
+    <script>
+        function fetchServerStatus() {
+            const url = 'https://api.mcstatus.io/v2/status/java/202.172.109.118';
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+
+                    const onlineStatus = data.online;
+                    const serverVersion = data.version.name_clean;
+                    const playersOnline = data.players.online;
+                    const playersMax = data.players.max;
+                    const serverMotd = data.motd.clean;
+
+                    document.getElementById('host').textContent = data.host;
+                    document.getElementById('port').textContent = data.port;
+                    document.getElementById('status').textContent = onlineStatus ? 'Online' : 'Offline';
+                    document.getElementById('version').textContent = serverVersion;
+                    document.getElementById('players').textContent = playersOnline + '/' + playersMax;
+                    document.getElementById('motd').textContent = serverMotd;
+
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        window.onload = fetchServerStatus;
+    </script>
 </head>
+
 <body>
     <header>
         <h1>Casual Gaming Group</h1>
     </header>
 
     <main>
-        <h2>Links:</h2>
-        <div class="link-card">
+        <h2>Servers:</h2>
+        <div class="link-card" id="server1">
             <h3>Minecraft Server</h3>
-            <p>Join us on our Minecraft server!</p>
-            <p>202.172.109.118:25565</p>
-            <p>View the web map!</p>
-            <p>202.172.109.118:8100</p>
-            <a href="https://202.172.109.118:8100/" target="_blank">Click here to view!</a>
+            <p>Status: <span id="server1status">Loading...</span></p>
+            <p>Players: <span id="server1players">Loading...</span></p>
+            <span id="map"></span><a href="https://202.172.109.118:8100/" target="_blank" class="btn"><i
+                    class="fas fa-map"></i>View 🗺️</a>
         </div>
-        <div class="link-card">
+        <div class="link-card" id="server2">
+            <h3>DayZ Server</h3>
+            <p>Status: <span id="server2status">Loading...</span></p>
+            <p>Players: <span id="server2players">Loading...</span></p>
+        </div>
+        <div class="link-card" id="server3">
+            <h3>7 Days to Die Server</h3>
+            <p>Status: <span id="server3status">Loading...</span></p>
+            <p>Players: <span id="server3players">Loading...</span></p>
+        </div>
+        <div class="link-card" id="server4">
             <h3>Teamspeak Server</h3>
-            <p>Join us on our Teamspeak server!</p>
-            <p>202.172.109.118</p>
+            <p>Status: <span id="server4status">Loading...</span></p>
+            <p>Players: <span id="server4players">Loading...</span></p>
             <a href="ts3server://202.172.109.118?port=9987">Click to connect!</a>
         </div>
         <div class="image-container">
-            <img src="shiba.png" alt="A shiba inu playing with wires">
+            <img src="media/shiba.png" alt="A shiba inu playing with wires">
             <p>Thanks for stopping by!</p>
         </div>
     </main>
 
-    <footer>
-        <!-- Add footer content here -->
-    </footer>
+    <foote style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+        <p>&copy; 2023 Casual Gaming Group</p>
+        </footer>
 </body>
+
 </html>
