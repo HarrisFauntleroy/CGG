@@ -98,14 +98,15 @@ export default async function Home() {
             )}
           </p>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Players: {minecraft.players.length || 0}/{minecraft.maxplayers || 0}
+            Players: {minecraft?.players?.length || 0}/
+            {minecraft?.maxplayers || 0}
           </p>
           {minecraft?.players?.map((player) => (
             <p
-              key={`player-${player.name}`}
+              key={`player-${player?.name}`}
               className={`m-0 max-w-[30ch] text-sm opacity-50`}
             >
-              {player.name}
+              {player?.name}
             </p>
           ))}
         </a>
@@ -145,15 +146,15 @@ export default async function Home() {
           </p>
           {sevenDaysToDie?.players?.map((player) => (
             <p
-              key={`player-${player.name}`}
+              key={`player-${player?.name}`}
               className={`m-0 max-w-[30ch] text-sm opacity-50`}
             >
-              {player.name}
+              {player?.name}
             </p>
           ))}
         </a>
         <a
-          href={`ts3server://${teamspeak3.connect}`}
+          href={`ts3server://${teamspeak3?.connect}`}
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
@@ -188,10 +189,10 @@ export default async function Home() {
           </p>
           {teamspeak3?.players?.map((player) => (
             <p
-              key={`player-${player.name}`}
+              key={`player-${player?.name}`}
               className={`m-0 max-w-[30ch] text-sm opacity-50`}
             >
-              {player.name}
+              {player?.name}
             </p>
           ))}
         </a>
