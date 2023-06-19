@@ -22,19 +22,19 @@ async function getData({
 const HOST = "202.172.109.118";
 
 export default async function Home() {
-  const minecraft: Minecraft = await getData({
+  const minecraft: GamedigResponse = await getData({
     game: "minecraft",
     host: HOST,
     port: "25565",
   });
 
-  const sevenDays = await getData({
+  const sevenDaysToDie: GamedigResponse = await getData({
     game: "7d2d",
     host: HOST,
     port: "26900",
   });
 
-  const teamspeakData = await getData({
+  const teamspeak3: GamedigResponse = await getData({
     game: "teamspeak3",
     host: HOST,
     port: "9987",
@@ -68,117 +68,152 @@ export default async function Home() {
           priority
         />
       </div>
-
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        {!minecraft.error && (
-          <a
-            href=""
-            className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={`mb-3 text-2xl font-semibold`}>
-              {minecraft.name}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
+        <a
+          href={`minecraft://connect/${minecraft.connect}`}
+          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 className={`mb-3 text-2xl font-semibold`}>
+            Minecraft Server {minecraft.raw.vanilla.raw.version.name}
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50 underline`}>
+            IP: {minecraft.connect}
+          </p>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            {minecraft.ping ? (
+              <span>
+                Ping: {minecraft.ping}ms{" "}
+                <span className="inline-block w-2 h-2 rounded-full bg-green-500" />
               </span>
-            </h2>
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              {minecraft.ping ? `Ping: ${minecraft.ping}ms` : "Offline"}
-            </p>
-            {minecraft?.players?.map((player) => (
-              <p key={player} className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-                {player.name}
-              </p>
-            ))}
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              Players: {JSON.stringify(minecraft.raw.vanilla.raw.players)}
-            </p>
-          </a>
-        )}
-        {!sevenDays.error && (
-          <a
-            href=""
-            className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={`mb-3 text-2xl font-semibold`}>
-              {sevenDays.name}
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
+            ) : (
+              <span>
+                Offline{" "}
+                <span className="inline-block w-2 h-2 rounded-full bg-red-500" />
               </span>
-            </h2>
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              {JSON.stringify(sevenDays)}
+            )}
+          </p>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            Players: {minecraft.players.length || 0}/{minecraft.maxplayers || 0}
+          </p>
+          {minecraft?.players?.map((player) => (
+            <p
+              key={`player-${player.name}`}
+              className={`m-0 max-w-[30ch] text-sm opacity-50`}
+            >
+              {player.name}
             </p>
-          </a>
-        )}
-        {!teamspeakData.error && (
-          <a
-            href=""
-            className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={`mb-3 text-2xl font-semibold`}>
-              Test
-              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-                -&gt;
+          ))}
+        </a>
+        <a
+          href={`ts3server://${sevenDaysToDie?.connect}`}
+          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 className={`mb-3 text-2xl font-semibold`}>
+            7 Days to Die
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+          {sevenDaysToDie?.connect && (
+            <p className={`m-0 max-w-[30ch] text-sm opacity-50 underline`}>
+              IP: {sevenDaysToDie?.connect}
+            </p>
+          )}
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            {sevenDaysToDie?.ping ? (
+              <span>
+                Ping: {sevenDaysToDie?.ping}ms{" "}
+                <span className="inline-block w-2 h-2 rounded-full bg-green-500" />
               </span>
-            </h2>
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-              {JSON.stringify(teamspeakData)}
+            ) : (
+              <span>
+                Offline{" "}
+                <span className="inline-block w-2 h-2 rounded-full bg-red-500" />
+              </span>
+            )}
+          </p>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            Players: {sevenDaysToDie?.players?.length || 0}/
+            {sevenDaysToDie?.maxplayers || 0}
+          </p>
+          {sevenDaysToDie?.players?.map((player) => (
+            <p
+              key={`player-${player.name}`}
+              className={`m-0 max-w-[30ch] text-sm opacity-50`}
+            >
+              {player.name}
             </p>
-          </a>
-        )}
+          ))}
+        </a>
+        <a
+          href={`ts3server://${teamspeak3.connect}`}
+          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 className={`mb-3 text-2xl font-semibold`}>
+            Teamspeak 3
+            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+              -&gt;
+            </span>
+          </h2>
+          {teamspeak3?.connect && (
+            <p className={`m-0 max-w-[30ch] text-sm opacity-50 underline`}>
+              IP: {teamspeak3?.connect}
+            </p>
+          )}
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            {teamspeak3?.ping ? (
+              <span>
+                Ping: {teamspeak3?.ping}ms{" "}
+                <span className="inline-block w-2 h-2 rounded-full bg-green-500" />
+              </span>
+            ) : (
+              <span>
+                Offline{" "}
+                <span className="inline-block w-2 h-2 rounded-full bg-red-500" />
+              </span>
+            )}
+          </p>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
+            Players: {teamspeak3?.players?.length || 0}/
+            {teamspeak3?.maxplayers || 0}
+          </p>
+          {teamspeak3?.players?.map((player) => (
+            <p
+              key={`player-${player.name}`}
+              className={`m-0 max-w-[30ch] text-sm opacity-50`}
+            >
+              {player.name}
+            </p>
+          ))}
+        </a>
       </div>
     </main>
   );
 }
 
-interface Minecraft {
+interface Player {
+  name: string;
+  ping: number;
+}
+interface GamedigResponse {
   error: string;
   name: string;
   map: string;
   password: boolean;
-  raw: {
-    vanilla: {
-      name: string;
-      map: string;
-      password: boolean;
-      raw: {
-        previewsChat: boolean;
-        enforcesSecureChat: boolean;
-        description: {
-          text: string;
-        };
-        players: {
-          max: number;
-          online: number;
-        };
-        version: {
-          name: string;
-          protocol: number;
-        };
-        forgeData: {
-          fmlNetworkVersion: number;
-          channels: any[]; // Replace 'any' with the correct type if known
-          mods: any[]; // Replace 'any' with the correct type if known
-          truncated: boolean;
-        };
-        preventsChatReports: boolean;
-      };
-      maxplayers: number;
-      players: any[]; // Replace 'any' with the correct type if known
-      bots: any[]; // Replace 'any' with the correct type if known
-      connect: string;
-      ping: number;
-    };
-  };
   maxplayers: number;
-  players: any[]; // Replace 'any' with the correct type if known
-  bots: any[]; // Replace 'any' with the correct type if known
+  players: Player[];
+  bots: Player[];
   connect: string;
   ping: number;
+  raw: any;
+  query: any;
 }
