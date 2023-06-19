@@ -37,7 +37,7 @@ export default async function Home() {
   const teamspeak3: GamedigResponse = await getData({
     game: "teamspeak3",
     host: HOST,
-    port: "9987",
+    port: "10011",
   });
 
   return (

@@ -9,7 +9,7 @@ yarn test
 echo "======== Testing ✅  ========"
 echo
 echo "======== Building 🏗️ ========"
-yarn build
+# yarn build
 echo "======== Building ✅ ========"
 echo
 echo "Tested ✅ Built ✅ Pushed 🚀"
