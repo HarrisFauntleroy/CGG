@@ -70,24 +70,24 @@ export default async function Home() {
       </div>
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
         <a
-          href={`minecraft://connect/${minecraft.connect}`}
+          href={`minecraft://connect/${minecraft?.connect}`}
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2 className={`mb-3 text-2xl font-semibold`}>
-            Minecraft Server {minecraft.raw.vanilla.raw.version.name}
+            Minecraft Server {minecraft?.raw?.vanilla?.raw?.version?.name}
             <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
               -&gt;
             </span>
           </h2>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50 underline`}>
-            IP: {minecraft.connect}
+            IP: {minecraft?.connect}
           </p>
           <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            {minecraft.ping ? (
+            {minecraft?.ping ? (
               <span>
-                Ping: {minecraft.ping}ms{" "}
+                Ping: {minecraft?.ping}ms{" "}
                 <span className="inline-block w-2 h-2 rounded-full bg-green-500" />
               </span>
             ) : (
@@ -214,6 +214,8 @@ interface GamedigResponse {
   bots: Player[];
   connect: string;
   ping: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   raw: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   query: any;
 }
