@@ -11,6 +11,7 @@
   "dependencies": {
     "autoprefixer": "10.4.14",
     "chalk": "^5.2.0",
+    "daisyui": "^3.1.1",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
     "gamedig": "^4.0.6",

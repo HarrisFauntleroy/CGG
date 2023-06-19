@@ -1,3 +1,4 @@
+import { Type } from "gamedig";
 import Image from "next/image";
 
 async function getData({
@@ -57,8 +58,7 @@ export default async function Home() {
           </a>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
+      <div className="my-8 relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
         <Image
           className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70]"
           src="/shiba.png"
@@ -68,134 +68,10 @@ export default async function Home() {
           priority
         />
       </div>
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href={`minecraft://connect/${minecraft?.connect}`}
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Minecraft Server {minecraft?.raw?.vanilla?.raw?.version?.name}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 underline`}>
-            IP: {minecraft?.connect}
-          </p>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            {minecraft?.ping ? (
-              <span>
-                Ping: {minecraft?.ping}ms{" "}
-                <span className="inline-block w-2 h-2 rounded-full bg-green-500" />
-              </span>
-            ) : (
-              <span>
-                Offline{" "}
-                <span className="inline-block w-2 h-2 rounded-full bg-red-500" />
-              </span>
-            )}
-          </p>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Players: {minecraft?.players?.length || 0}/
-            {minecraft?.maxplayers || 0}
-          </p>
-          {minecraft?.players?.map((player) => (
-            <p
-              key={`player-${player?.name}`}
-              className={`m-0 max-w-[30ch] text-sm opacity-50`}
-            >
-              {player?.name}
-            </p>
-          ))}
-        </a>
-        <a
-          href={`ts3server://${sevenDaysToDie?.connect}`}
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            7 Days to Die
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          {sevenDaysToDie?.connect && (
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50 underline`}>
-              IP: {sevenDaysToDie?.connect}
-            </p>
-          )}
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            {sevenDaysToDie?.ping ? (
-              <span>
-                Ping: {sevenDaysToDie?.ping}ms{" "}
-                <span className="inline-block w-2 h-2 rounded-full bg-green-500" />
-              </span>
-            ) : (
-              <span>
-                Offline{" "}
-                <span className="inline-block w-2 h-2 rounded-full bg-red-500" />
-              </span>
-            )}
-          </p>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Players: {sevenDaysToDie?.players?.length || 0}/
-            {sevenDaysToDie?.maxplayers || 0}
-          </p>
-          {sevenDaysToDie?.players?.map((player) => (
-            <p
-              key={`player-${player?.name}`}
-              className={`m-0 max-w-[30ch] text-sm opacity-50`}
-            >
-              {player?.name}
-            </p>
-          ))}
-        </a>
-        <a
-          href={`ts3server://${teamspeak3?.connect}`}
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Teamspeak 3
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          {teamspeak3?.connect && (
-            <p className={`m-0 max-w-[30ch] text-sm opacity-50 underline`}>
-              IP: {teamspeak3?.connect}
-            </p>
-          )}
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            {teamspeak3?.ping ? (
-              <span>
-                Ping: {teamspeak3?.ping}ms{" "}
-                <span className="inline-block w-2 h-2 rounded-full bg-green-500" />
-              </span>
-            ) : (
-              <span>
-                Offline{" "}
-                <span className="inline-block w-2 h-2 rounded-full bg-red-500" />
-              </span>
-            )}
-          </p>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Players: {teamspeak3?.players?.length || 0}/
-            {teamspeak3?.maxplayers || 0}
-          </p>
-          {teamspeak3?.players?.map((player) => (
-            <p
-              key={`player-${player?.name}`}
-              className={`m-0 max-w-[30ch] text-sm opacity-50`}
-            >
-              {player?.name}
-            </p>
-          ))}
-        </a>
+      <div className="flex flex-col gap-4 justify-center items-center mb-32">
+        <GenericGamedigResult data={minecraft} type="minecraft" />
+        <GenericGamedigResult data={sevenDaysToDie} type="7d2d" />
+        <GenericGamedigResult data={teamspeak3} type="teamspeak3" />
       </div>
     </main>
   );
@@ -215,8 +91,70 @@ interface GamedigResponse {
   bots: Player[];
   connect: string;
   ping: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  raw: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  query: any;
+}
+
+function getHref(data: GamedigResponse, type?: Type) {
+  switch (type) {
+    case "minecraft":
+      return `minecraft://connect/${data?.connect}`;
+    case "teamspeak3":
+      return `ts3server://${data?.connect}`;
+    case "7d2d":
+      return `steam://connect/${data?.connect}`;
+    default:
+      return data?.connect;
+  }
+}
+
+function GenericGamedigResult({
+  data,
+  type,
+}: {
+  data: GamedigResponse;
+  type?: Type;
+}) {
+  return (
+    <a
+      href={getHref(data, type)}
+      className="card flex flex-row w-[100%] gap-8 justify-between bg-zinc-900 group rounded-lg border border-transparent p-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div>
+        <h2 className={`mb-3 text-2xl font-semibold`}>
+          {data?.name}
+          <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+            -&gt;
+          </span>
+        </h2>
+        <p className={`m-0 max-w-[30ch] text-sm opacity-50 underline`}>
+          IP: {data?.connect || "N/A"}
+        </p>
+        <p className={`m-0 max-w-[30ch] text-sm opacity-50`}></p>
+        {data?.players?.map((player) => (
+          <p
+            key={`player-${player?.name}`}
+            className={`m-0 max-w-[30ch] text-sm opacity-50`}
+          >
+            {player?.name}
+          </p>
+        ))}
+        <div className="mt-2 flex flex-row gap-2">
+          {data?.ping ? (
+            <span className="badge badge-success">Ping: {data?.ping}ms </span>
+          ) : (
+            <span className="badge badge-error">Offline</span>
+          )}
+          <div className="badge badge-outline">
+            Players: {data?.players?.length || 0}/{data?.maxplayers || 0}
+          </div>
+        </div>
+      </div>
+      <div className="avatar">
+        <div className="w-24 rounded">
+          <img className="mask mask-hexagon" src={`/${type}.png`} alt="logo" />
+        </div>
+      </div>
+    </a>
+  );
 }
