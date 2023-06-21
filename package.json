@@ -1,0 +1,153 @@
+{
+  "private": true,
+  "homepage": "https://cgg.vercel.app/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HarrisFauntleroy/CGG"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Harris Fauntleroy",
+    "url": "https://github.com/HarrisFauntleroy"
+  },
+  "scripts": {
+    "audit:fix": "yarn audit --fix .",
+    "docker:prune": "docker system prune --all",
+    "format": "prettier --write .",
+    "lint": "eslint . --color",
+    "lint:fix": "eslint . --fix --color",
+    "lint:watch": "esw . --ext .js,.jsx,.ts,.tsx --watch --fix --color --changed --clear",
+    "prepare": "husky install",
+    "test": "jest --passWithNoTests --watchAll=false"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "yarn format",
+      "yarn lint:fix"
+    ]
+  },
+  "prettier": {
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "endOfLine": "lf",
+    "jsxSingleQuote": false,
+    "printWidth": 80,
+    "proseWrap": "always",
+    "quoteProps": "consistent",
+    "semi": true,
+    "singleQuote": false,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "useTabs": false
+  },
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "es6": true,
+      "jest": true,
+      "node": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "settings": {
+      "import/resolver": {
+        "typescript": true,
+        "node": true
+      },
+      "next": {
+        "rootDir": [
+          "apps/*/"
+        ]
+      },
+      "react": {
+        "version": "detect"
+      }
+    },
+    "plugins": [
+      "@typescript-eslint",
+      "simple-import-sort",
+      "import",
+      "security",
+      "sonarjs",
+      "jsx-a11y",
+      "prettier",
+      "jest",
+      "progress"
+    ],
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "eslint:recommended",
+      "plugin:import/typescript",
+      "plugin:import/recommended",
+      "plugin:security/recommended",
+      "plugin:sonarjs/recommended",
+      "plugin:jsx-a11y/recommended",
+      "plugin:storybook/recommended",
+      "plugin:prettier/recommended",
+      "plugin:jest/recommended"
+    ],
+    "rules": {
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "argsIgnorePattern": "^_"
+        }
+      ],
+      "import/extensions": "off",
+      "simple-import-sort/imports": [
+        "off",
+        {
+          "groups": [
+            [
+              "^react$"
+            ],
+            [
+              "^(ui|common|database|database/generated/prisma-client)$"
+            ],
+            [
+              "^[./]"
+            ]
+          ]
+        }
+      ],
+      "security/detect-object-injection": "off",
+      "@next/next/no-html-link-for-pages": "off",
+      "progress/activate": 1
+    },
+    "ignorePatterns": [
+      ".yarn",
+      ".next",
+      "dist",
+      "generated",
+      "node_modules"
+    ],
+    "root": true
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.26.1",
+    "@octokit/types": "^9.2.3",
+    "opencommit": "^2.2.10"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "^13.4.6",
+    "@typescript-eslint/eslint-plugin": "^5.59.2",
+    "@typescript-eslint/parser": "^5.59.2",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jest": "^27.2.1",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-progress": "^0.0.1",
+    "eslint-plugin-security": "^1.7.1",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-sonarjs": "0.19.0",
+    "eslint-plugin-storybook": "^0.6.11",
+    "gh-pages": "^5.0.0",
+    "husky": "^8.0.3",
+    "jest": "^29.5.0",
+    "lint-staged": "^13.2.2",
+    "prettier": "2.8.8",
+    "typescript": "5"
+  }
+}

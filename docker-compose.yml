@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  minecraft:
+    image: itzg/minecraft-server
+    restart: always
+    # Required to use server console 💻
+    stdin_open: true
+    tty: true
+    environment:
+      TYPE: "AUTO_CURSEFORGE"
+      # CurseForge API key (sensitive!) 🔑
+      CF_API_KEY: ${CF_API_KEY}
+      CF_SLUG: "casual-gaming-group"
+      # IDs of mods to be excluded ❌
+      CF_EXCLUDE_MODS: "297038,268495,508933"
+      # Set to true in the event of pack update 📦
+      CF_FORCE_SYNCHRONIZE: false
+      MEMORY: "8G"
+      EULA: true
+      DIFFICULTY: "NORMAL"
+      WHITELIST: ${WHITELIST}
+      OPS: ${OPS}
+      ENABLE_WHITELIST: true
+      ENFORCE_WHITELIST: true
+      SPAWN_PROTECTION: "64"
+      ALLOW_FLIGHT: true
+      SNOOPER_ENABLED: false
+      ENABLE_AUTOPAUSE: true
+      MOTD: "CGG 1.19.2"
+      USE_AIKAR_FLAGS: true
+    volumes:
+      - "./data:/data"
+    ports:
+      - "25565:25565" # Server port
+      - "8100:8100" # Bluemap port
