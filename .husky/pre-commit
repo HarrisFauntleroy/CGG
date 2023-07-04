@@ -1,6 +1,0 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-echo "======== Lint Staged 🔬  ========"
-yarn lint-staged
-echo "======== Lint Staged ✅  ========"
