@@ -1,32 +1,23 @@
-import { QueryOptions, Type } from "gamedig";
+import { Type } from "gamedig";
 import Image from "next/image";
 import { Fragment } from "react";
-
-interface Player {
-  name: string;
-  ping: number;
-}
-interface GamedigResponse {
-  error: string;
-  name: string;
-  map: string;
-  password: boolean;
-  maxplayers: number;
-  players: Player[];
-  bots: Player[];
-  connect: string;
-  ping: number;
-}
 
 const API_URL =
   process.env.NODE_ENV === "development"
     ? "http://localhost:3000"
     : "https://cgg.vercel.app";
-
-async function getData({ type, host, port }: QueryOptions) {
+async function getData({
+  game,
+  host,
+  port,
+}: {
+  game: string;
+  host: string;
+  port?: string;
+}) {
   try {
     const res = await fetch(
-      `${API_URL}/api/health?game=${type}&host=${host}&port=${port}`,
+      `${API_URL}/api/health?game=${game}&host=${host}&port=${port}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -37,13 +28,31 @@ async function getData({ type, host, port }: QueryOptions) {
     );
     return res.json();
   } catch (error) {
-    console.log(`Error fetching ${type} data: ${error}`);
+    console.log(`Error fetching ${game} data: ${error}`);
   }
 }
 
 const HOST = "202.172.109.118";
 
-export default function Home() {
+export default async function Home() {
+  const minecraft: GamedigResponse = await getData({
+    game: "minecraft",
+    host: HOST,
+    port: "25565",
+  });
+
+  const sevenDaysToDie: GamedigResponse = await getData({
+    game: "7d2d",
+    host: HOST,
+    port: "26900",
+  });
+
+  const teamspeak3: GamedigResponse = await getData({
+    game: "teamspeak3",
+    host: HOST,
+    port: "9987",
+  });
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-16">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -72,33 +81,31 @@ export default function Home() {
         />
       </div>
       <div className="flex flex-col gap-4 justify-center items-center mb-32">
-        <GenericGamedigResult
-          options={{
-            type: "teamspeak3",
-            host: HOST,
-            port: 9987,
-          }}
-        />
-        <GenericGamedigResult
-          options={{
-            type: "minecraft",
-            host: HOST,
-            port: 25565,
-          }}
-        />
-        <GenericGamedigResult
-          options={{
-            type: "7d2d",
-            host: HOST,
-            port: 26900,
-          }}
-        />
+        <GenericGamedigResult data={teamspeak3} type="teamspeak3" />
+        <GenericGamedigResult data={minecraft} type="minecraft" />
+        <GenericGamedigResult data={sevenDaysToDie} type="7d2d" />
       </div>
     </main>
   );
 }
 
-function getHref(data: GamedigResponse, type: Type) {
+interface Player {
+  name: string;
+  ping: number;
+}
+interface GamedigResponse {
+  error: string;
+  name: string;
+  map: string;
+  password: boolean;
+  maxplayers: number;
+  players: Player[];
+  bots: Player[];
+  connect: string;
+  ping: number;
+}
+
+function getHref(data: GamedigResponse, type?: Type) {
   switch (type) {
     case "minecraft":
       return `minecraft://connect/${data?.connect}`;
@@ -111,97 +118,61 @@ function getHref(data: GamedigResponse, type: Type) {
   }
 }
 
-function MinecraftExtra() {
+function GenericGamedigResult({
+  data,
+  type,
+}: {
+  data: GamedigResponse;
+  type?: Type;
+}) {
   return (
-    <div className="mt-2 flex flex-col gap-2 items-center sm:items-start">
-      <a
-        href="https://your-webmap-url"
-        className="text-xs sm:text-sm underline text-blue-500"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        View Webmap
-      </a>
-      <a
-        href="https://your-modpack-url"
-        className="text-xs sm:text-sm underline text-blue-500"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Download Modpack
-      </a>
-      <a
-        href="https://your-prisma-launcher-url"
-        className="text-xs sm:text-sm underline text-blue-500"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Get Prisma Launcher
-      </a>
-    </div>
-  );
-}
-
-async function GenericGamedigResult({ options }: { options: QueryOptions }) {
-  const data = await getData(options);
-  const href = getHref(data, options.type);
-  return (
-    <>
-      <div className="collapse bg-base-200">
-        <input type="checkbox" />
-        <div className="collapse-title text-xl font-medium w-[420px] flex flex-col flex-grow sm:items-start items-center">
-          <h2
-            className={`mb-3 text-xl sm:text-2xl font-semibold text-center sm:text-left`}
+    <a
+      href={getHref(data, type)}
+      className="card flex flex-row w-full gap-2 sm:gap-4 justify-between bg-zinc-900 group rounded-lg border border-transparent p-2 sm:p-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <div className="flex flex-col flex-grow sm:items-start items-center">
+        <h2
+          className={`mb-3 text-xl sm:text-2xl font-semibold text-center sm:text-left`}
+        >
+          {data?.name || type}
+          <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+            -&gt;
+          </span>
+        </h2>
+        <p
+          className={`m-0 max-w-[30ch] text-xs sm:text-sm opacity-50 underline text-center sm:text-left`}
+        >
+          IP: {data?.connect || "N/A"}
+        </p>
+        <p className={`m-0 max-w-[30ch] text-xs sm:text-sm opacity-50`}></p>
+        {data?.players?.map((player) => (
+          <p
+            key={`player-${player?.name}`}
+            className={`m-0 max-w-[30ch] text-xs sm:text-sm opacity-50`}
           >
-            {data?.name || options.type}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <a href={href} target="_blank" rel="noopener noreferrer">
-            <p
-              className={`m-0 max-w-[30ch] text-xs sm:text-sm opacity-50 underline text-center sm:text-left`}
-            >
-              Connect: {href}
-            </p>
-          </a>
-
-          <p className={`m-0 max-w-[30ch] text-xs sm:text-sm opacity-50`}></p>
-          {data?.players?.map((player: Player) => (
-            <p
-              key={`player-${player?.name}`}
-              className={`m-0 max-w-[30ch] text-xs sm:text-sm opacity-50`}
-            >
-              {player?.name}
-            </p>
-          ))}
-          <div className="mt-2 flex flex-row flex-wrap gap-2 items-center justify-center sm:justify-start">
-            {data?.ping ? (
-              <span className="badge badge-success">Ping: {data?.ping}ms </span>
-            ) : (
-              <span className="badge badge-error">Offline</span>
-            )}
-            <div className="badge badge-outline gap-1">
-              <UserIcon count={data?.players?.length} />
-              {data?.players?.length || 0}/{data?.maxplayers || 0}
-            </div>
+            {player?.name}
+          </p>
+        ))}
+        <div className="mt-2 flex flex-row flex-wrap gap-2 items-center justify-center sm:justify-start">
+          {data?.ping ? (
+            <span className="badge badge-success">Ping: {data?.ping}ms </span>
+          ) : (
+            <span className="badge badge-error">Offline</span>
+          )}
+          <div className="badge badge-outline gap-1">
+            <UserIcon count={data?.players?.length} />
+            {data?.players?.length || 0}/{data?.maxplayers || 0}
           </div>
-          <div className="avatar w-16 h-16 sm:w-24 sm:h-24">
-            <div className="rounded">
-              <img
-                className="mask mask-squircle"
-                src={`/${options.type}.png`}
-                alt="logo"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="collapse-content">
-          {options.type === "minecraft" && <MinecraftExtra />}
         </div>
       </div>
-    </>
+      <div className="avatar w-16 h-16 sm:w-24 sm:h-24">
+        <div className="rounded">
+          <img className="mask mask-squircle" src={`/${type}.png`} alt="logo" />
+        </div>
+      </div>
+    </a>
   );
 }
 
