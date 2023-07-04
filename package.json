@@ -93,6 +93,8 @@
         }
       ],
       "import/extensions": "off",
+      "progress/activate": 1,
+      "security/detect-object-injection": "off",
       "simple-import-sort/imports": [
         "off",
         {
@@ -109,9 +111,7 @@
           ]
         }
       ],
-      "security/detect-object-injection": "off",
-      "@next/next/no-html-link-for-pages": "off",
-      "progress/activate": 1
+      "@next/next/no-html-link-for-pages": "off"
     },
     "ignorePatterns": [
       ".yarn",
@@ -148,6 +148,6 @@
     "jest": "^29.5.0",
     "lint-staged": "^13.2.2",
     "prettier": "2.8.8",
-    "typescript": "5"
+    "typescript": "5.0.3"
   }
 }
