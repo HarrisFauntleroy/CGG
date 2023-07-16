@@ -125,7 +125,7 @@
   "dependencies": {
     "@changesets/cli": "^2.26.2",
     "@octokit/types": "^9.3.2",
-    "opencommit": "^2.2.10"
+    "opencommit": "^2.4.2"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.4.9",
