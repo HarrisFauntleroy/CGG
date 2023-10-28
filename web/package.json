@@ -13,7 +13,7 @@
     "chalk": "^5.3.0",
     "daisyui": "^3.9.3",
     "eslint": "8.51.0",
-    "eslint-config-next": "13.5.5",
+    "eslint-config-next": "13.5.6",
     "gamedig": "^4.1.0",
     "next": "13.5.4",
     "postcss": "8.4.31",
@@ -22,10 +22,10 @@
     "tailwindcss": "3.3.3"
   },
   "devDependencies": {
-    "@types/gamedig": "^4.0.2",
-    "@types/node": "20.8.6",
-    "@types/react": "18.2.28",
-    "@types/react-dom": "18.2.13",
+    "@types/gamedig": "^4.0.4",
+    "@types/node": "20.8.7",
+    "@types/react": "18.2.31",
+    "@types/react-dom": "18.2.14",
     "typescript": "5.2.2"
   }
 }

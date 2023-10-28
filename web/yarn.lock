@@ -112,10 +112,10 @@
   resolved "https://registry.yarnpkg.com/@next/env/-/env-13.5.4.tgz#777c3af16de2cf2f611b6c8126910062d13d222c"
   integrity sha512-LGegJkMvRNw90WWphGJ3RMHMVplYcOfRWf2Be3td3sUa+1AaxmsYyANsA+znrGCBjXJNi4XAQlSoEfUxs/4kIQ==
 
-"@next/eslint-plugin-next@13.5.5":
-  version "13.5.5"
-  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-13.5.5.tgz#b3418135efbfa04d64c2c54f93d09c5ea4de4610"
-  integrity sha512-S/32s4S+SCOpW58lHKdmILAAPRdnsSei7Y3L1oZSoe5Eh0QSlzbG1nYyIpnpwWgz3T7qe3imdq7cJ6Hf29epRA==
+"@next/eslint-plugin-next@13.5.6":
+  version "13.5.6"
+  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-13.5.6.tgz#cf279b94ddc7de49af8e8957f0c3b7349bc489bf"
+  integrity sha512-ng7pU/DDsxPgT6ZPvuprxrkeew3XaRf4LAT4FabaEO/hAbvVx4P7wqnqdbTdDn1kgTvsI4tpIgT4Awn/m0bGbg==
   dependencies:
     glob "7.1.7"
 
@@ -221,10 +221,10 @@
   dependencies:
     defer-to-connect "^2.0.1"
 
-"@types/gamedig@^4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@types/gamedig/-/gamedig-4.0.2.tgz#90aceeccba97401f534ea39860dab4bce8e0e1af"
-  integrity sha512-etdXuhqazt77vw2e8orXvNXOr4un8gmJwv6kGqWoMuHUUUEqgIfUEeX/bPPFiaHxyTOo0BUXTA6/dw6UcpnSPw==
+"@types/gamedig@^4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@types/gamedig/-/gamedig-4.0.4.tgz#44cd975d464202bb305ce6bf9e05ff9b6f56c3b0"
+  integrity sha512-PrtyWRSFYWIVEnKuYE1phg9sFX35q3svUBTUNKJUmQUjs1r3+ys++pqosSAtle9CbgJmJhczJ31QMkixYb+4Mg==
 
 "@types/http-cache-semantics@^4.0.1":
   version "4.0.1"
@@ -236,10 +236,10 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
-"@types/node@20.8.6":
-  version "20.8.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.8.6.tgz#0dbd4ebcc82ad0128df05d0e6f57e05359ee47fa"
-  integrity sha512-eWO4K2Ji70QzKUqRy6oyJWUeB7+g2cRagT3T/nxYibYcT4y2BDL8lqolRXjTHmkZCdJfIPaY73KbJAZmcryxTQ==
+"@types/node@20.8.7":
+  version "20.8.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.8.7.tgz#ad23827850843de973096edfc5abc9e922492a25"
+  integrity sha512-21TKHHh3eUHIi2MloeptJWALuCu5H7HQTdTrWIFReA8ad+aggoX+lRes3ex7/FtpC+sVUpFMQ+QTfYr74mruiQ==
   dependencies:
     undici-types "~5.25.1"
 
@@ -248,10 +248,10 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.5.tgz#5f19d2b85a98e9558036f6a3cacc8819420f05cf"
   integrity sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==
 
-"@types/react-dom@18.2.13":
-  version "18.2.13"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.13.tgz#89cd7f9ec8b28c8b6f0392b9591671fb4a9e96b7"
-  integrity sha512-eJIUv7rPP+EC45uNYp/ThhSpE16k22VJUknt5OLoH9tbXoi8bMhwLf5xRuWMywamNbWzhrSmU7IBJfPup1+3fw==
+"@types/react-dom@18.2.14":
+  version "18.2.14"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.14.tgz#c01ba40e5bb57fc1dc41569bb3ccdb19eab1c539"
+  integrity sha512-V835xgdSVmyQmI1KLV2BEIUgqEuinxp9O4G6g3FqO/SqLac049E53aysv0oEFD2kHfejeKU+ZqL2bcFWj9gLAQ==
   dependencies:
     "@types/react" "*"
 
@@ -264,10 +264,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@18.2.28":
-  version "18.2.28"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.28.tgz#86877465c0fcf751659a36c769ecedfcfacee332"
-  integrity sha512-ad4aa/RaaJS3hyGz0BGegdnSRXQBkd1CCYDCdNjBPg90UUpLgo+WlJqb9fMYUxtehmzF3PJaTWqRZjko6BRzBg==
+"@types/react@18.2.31":
+  version "18.2.31"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.31.tgz#74ae2630e4aa9af599584157abd3b95d96fb9b40"
+  integrity sha512-c2UnPv548q+5DFh03y8lEDeMfDwBn9G3dRwfkrxQMo/dOtRHUUO57k6pHvBIfH/VF4Nh+98mZ5aaSe+2echD5g==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -1092,12 +1092,12 @@ escape-string-regexp@^4.0.0:
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-4.0.0.tgz#14ba83a5d373e3d311e5afca29cf5bfad965bf34"
   integrity sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==
 
-eslint-config-next@13.5.5:
-  version "13.5.5"
-  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-13.5.5.tgz#50ec30b62458f0cae4127308ed354d02211a3c32"
-  integrity sha512-kQr/eevFyzeVt0yCKTchQp3MTIx8ZmBsAKLW+7bzmAXHcf2vvxIqAt2N/afb9SZpuXXhSb/8yrKQGVUVpYmafQ==
+eslint-config-next@13.5.6:
+  version "13.5.6"
+  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-13.5.6.tgz#3a5a6222d5cb32256760ad68ab8e976e866a08c8"
+  integrity sha512-o8pQsUHTo9aHqJ2YiZDym5gQAMRf7O2HndHo/JZeY7TDD+W4hk6Ma8Vw54RHiBeb7OWWO5dPirQB+Is/aVQ7Kg==
   dependencies:
-    "@next/eslint-plugin-next" "13.5.5"
+    "@next/eslint-plugin-next" "13.5.6"
     "@rushstack/eslint-patch" "^1.3.3"
     "@typescript-eslint/parser" "^5.4.2 || ^6.0.0"
     eslint-import-resolver-node "^0.3.6"
