@@ -124,7 +124,7 @@
   },
   "dependencies": {
     "@changesets/cli": "^2.26.2",
-    "@octokit/types": "^9.3.2",
+    "@octokit/types": "^9.3.2 || ^12.0.0",
     "opencommit": "^2.4.2"
   },
   "devDependencies": {
